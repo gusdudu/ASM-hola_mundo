@@ -1,0 +1,18 @@
+section .data
+    hello db 'Hola, Mundo',0
+
+section .text
+    global _start
+
+_start:
+    ; Escribir el mensaje en la consola
+    mov eax, 4         ; Código de llamada al sistema para sys_write
+    mov ebx, 1         ; Descriptor de archivo estándar de salida (stdout)
+    mov ecx, hello    ; Dirección del mensaje
+    mov edx, 13        ; Longitud del mensaje
+    int 0x80           ; Llamar al sistema
+
+    ; Salir del programa
+    mov eax, 1         ; Código de llamada al sistema para sys_exit
+    xor ebx, ebx       ; Código de salida (0)
+    int 0x80           ; Llamar al sistema
